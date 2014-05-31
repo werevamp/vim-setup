@@ -1,20 +1,14 @@
-" set default 'runtimepath' (without ~/.vim folders)
-let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
-
-" what is the name of the directory containing this file?
-let s:portable = expand('<sfile>:p:h')
-
-" add the directory to 'runtimepath'
-let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
-
-set nocompatible
+"set nocompatible
+filetype plugin indent on
 
 " Color Scheme 
 syntax on
-colo nature
+set t_Co=256
+colorscheme molokai
+set guifont=Monaco:h12
 set background=dark
 
-" Basic Options 
+" Basic Options
 set hidden
 set ruler
 set history=200
@@ -25,19 +19,8 @@ set showmatch
 set autoread
 set visualbell
 set title
-set mouse=a
 set ttyfast
 set lazyredraw
-set bomb
-set fileencoding=utf-8
-
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8                     " better default than latin1
-  setglobal fileencoding=utf-8           " change default file encoding when writing new files
-endif
 
 au vimresized * exe "normal! \<c-w>="
 
@@ -49,9 +32,9 @@ set autoindent
 set smartindent
 
 set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 " search
 set hlsearch
@@ -70,32 +53,17 @@ set noswapfile
 set nobackup
 set nowb
 set backup
-set backupdir=~/.vim/1337squad"
 
 " Folding 
 set foldlevelstart=0
 
+" Setting the wild menu like bash tab completion        
+set wildmode=longest,list,full
+set wildmenu
+
 " Space to toggle folds
 nnoremap <Space> za
 vnoremap <Space> zf
-
-" Binding for command line mode
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-cnoremap <c-b>  <Left>
-cnoremap <c-f>  <Right>
-cnoremap <c-d>  <Delete>
-cnoremap <m-b>  <S-Left>
-cnoremap <m-f>  <S-Right>
-cnoremap <m-d>  <S-right><Delete>
-cnoremap <esc>b <S-Left>
-cnoremap <esc>f <S-Right>
-cnoremap <esc>d <S-right><Delete>
-cnoremap <c-g>  <c-c>
-
-" Remove Highlight
-nnoremap <leader><space> :nohl<cr>
-
 
 fun! FoldText()
     let line = getline(v:foldstart)
@@ -110,8 +78,7 @@ fun! FoldText()
     let line = strpart(line, 0, windowwidth - 2 - len(folderlinecount))
     let fillcharcount = windowwidth - len(line) - len(folderlinecount)
     return line . repeat(" ", fillcharcount) . '  ' . folderlinecount . '  ' 
-endfun
-set foldtext=FoldText()
+endfun set foldtext=FoldText()
 
 " Save the state of folds
 au BufWinLeave * silent! mkview
@@ -147,6 +114,13 @@ nnoremap <leader>w :w!<CR>
 nnoremap ; :
 nnoremap : ;
 
+" Allow VIM to move through wrapped lines
+"nnoremap j gj
+"nnoremap k gk
+
+" Search and replace the current word
+nnoremap <leader>sr :%s/\<<C-r><C-w>\>//gc<Left><Left>
+
 nnoremap <leader>vimrc :tabe ~/.vimrc<CR>
 
 " paste toggle
@@ -160,27 +134,32 @@ nnoremap <C-h> :tabp<CR>
 
 nnoremap <C-s> :update<CR>
 
+set lsp=10
+
 "Change Cases
 nnoremap <C-u> gUiw
 inoremap <C-u> <esc>gUiwea
 
 " Binding for command line mode
-cnoremap <c-a> <home>
+
 cnoremap <c-e> <end>
+cnoremap <c-b>  <Left>
+cnoremap <c-f>  <Right>
+cnoremap <c-d>  <Delete>
+cnoremap <m-b>  <S-Left>
+cnoremap <m-f>  <S-Right>
+cnoremap <m-d>  <S-right><Delete>
+cnoremap <esc>b <S-Left>
+cnoremap <esc>f <S-Right>
+cnoremap <esc>d <S-right><Delete>
+cnoremap <c-g>  <c-c>
 
 nnoremap S i<cr><esc>
 
-nnoremap <Right> :vertical resize +5<CR>
-nnoremap <Left> :vertical resize -5<CR>
-nnoremap <Down> :resize +5<CR>
-nnoremap <Up> :resize -5<CR>
-
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" Setting the wild menu like bash tab completion
-set wildmode=longest,list,full
-set wildmenu
-
+" Remove Highlight
+nnoremap <leader><space> :nohl<cr>
 
 " Delete buffer while keeping window layout (don't close buffer's windows).  " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
 if v:version < 700 || exists('loaded_bclose') || &cp
@@ -254,8 +233,36 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <Leader>d :Bclose!<CR>
 
+" Search for selected text 
+vnoremap <silent> * "hy:<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>N
+
+" Search and Replace
+inoremap <C-s> <esc>:%s/<C-r>h//gc<left><left><left>
+nnoremap <C-s> :%s/<C-r>h//gc<left><left><left>
+
 " Plugin
+
+" Pathogen
+execute pathogen#infect()
+
+" NERDTree
 hi Directory ctermfg=3 ctermbg=4
 autocmd VimEnter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd VimEnter * :wincmd l
+nnoremap <F2> :NERDTreeToggle<CR>
+
+" TagList
+nnoremap <silent> <F3> :TlistToggle<CR>
+let Tlist_Use_Right_Window = 1
+
+" Syntax
+
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
