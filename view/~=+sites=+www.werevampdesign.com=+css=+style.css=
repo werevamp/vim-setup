@@ -1,0 +1,592 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s1:/*,mb:*,ex:*/
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'css'
+setlocal filetype=css
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=FoldText()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=^\\s*@import\\s\\+\\%(url(\\)\\=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'css'
+setlocal syntax=css
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+16,23fold
+24,34fold
+35,45fold
+46,50fold
+51,53fold
+54,62fold
+65,72fold
+73,78fold
+79,86fold
+87,89fold
+105,131fold
+132,138fold
+139,146fold
+147,154fold
+158,162fold
+163,168fold
+169,176fold
+177,184fold
+185,190fold
+191,212fold
+213,220fold
+222,229fold
+230,235fold
+236,241fold
+242,247fold
+248,253fold
+254,259fold
+260,265fold
+266,271fold
+272,277fold
+278,283fold
+284,288fold
+284,289fold
+221,290fold
+291,298fold
+300,305fold
+306,311fold
+312,317fold
+318,323fold
+324,329fold
+330,335fold
+336,341fold
+342,347fold
+299,348fold
+349,356fold
+357,364fold
+366,371fold
+372,377fold
+378,383fold
+384,389fold
+390,395fold
+396,401fold
+402,407fold
+408,413fold
+414,419fold
+420,425fold
+426,431fold
+365,432fold
+433,440fold
+442,447fold
+448,453fold
+454,459fold
+460,465fold
+466,471fold
+472,477fold
+478,483fold
+484,489fold
+441,490fold
+491,496fold
+497,500fold
+501,505fold
+506,512fold
+513,516fold
+517,521fold
+523,526fold
+527,532fold
+533,536fold
+540,555fold
+556,563fold
+564,572fold
+573,576fold
+577,581fold
+582,585fold
+586,590fold
+591,595fold
+596,600fold
+601,605fold
+606,610fold
+611,615fold
+616,620fold
+621,625fold
+626,630fold
+631,635fold
+636,640fold
+641,645fold
+646,650fold
+651,655fold
+656,660fold
+661,665fold
+666,670fold
+671,675fold
+676,680fold
+681,685fold
+686,690fold
+691,695fold
+696,700fold
+701,705fold
+706,710fold
+711,715fold
+716,720fold
+721,725fold
+726,730fold
+731,735fold
+736,740fold
+741,745fold
+746,750fold
+751,755fold
+757,761fold
+762,765fold
+769,773fold
+774,782fold
+783,792fold
+793,805fold
+806,809fold
+810,816fold
+817,822fold
+823,828fold
+829,835fold
+836,843fold
+846,851fold
+852,857fold
+858,863fold
+844,865fold
+868,873fold
+874,879fold
+880,885fold
+866,887fold
+888,894fold
+895,916fold
+917,923fold
+924,945fold
+949,953fold
+954,957fold
+958,966fold
+967,970fold
+971,978fold
+979,987fold
+988,991fold
+992,1002fold
+1003,1006fold
+1007,1012fold
+1013,1021fold
+1022,1025fold
+1026,1033fold
+1034,1037fold
+1038,1041fold
+1045,1062fold
+1063,1068fold
+16
+normal zc
+24
+normal zc
+35
+normal zc
+46
+normal zc
+51
+normal zc
+54
+normal zc
+65
+normal zc
+73
+normal zc
+79
+normal zc
+87
+normal zc
+105
+normal zo
+132
+normal zc
+139
+normal zc
+147
+normal zc
+158
+normal zc
+163
+normal zc
+169
+normal zc
+177
+normal zc
+185
+normal zc
+191
+normal zc
+213
+normal zc
+221
+normal zo
+222
+normal zc
+230
+normal zc
+236
+normal zc
+242
+normal zc
+248
+normal zc
+254
+normal zc
+260
+normal zc
+266
+normal zc
+272
+normal zc
+278
+normal zc
+284
+normal zo
+284
+normal zc
+284
+normal zc
+221
+normal zc
+291
+normal zc
+299
+normal zo
+300
+normal zc
+306
+normal zc
+312
+normal zc
+318
+normal zc
+324
+normal zc
+330
+normal zc
+336
+normal zc
+342
+normal zc
+299
+normal zc
+349
+normal zc
+357
+normal zc
+365
+normal zo
+366
+normal zc
+372
+normal zc
+378
+normal zc
+384
+normal zc
+390
+normal zc
+396
+normal zc
+402
+normal zc
+408
+normal zc
+414
+normal zc
+420
+normal zc
+426
+normal zc
+365
+normal zc
+433
+normal zc
+441
+normal zo
+442
+normal zc
+448
+normal zc
+454
+normal zc
+460
+normal zc
+466
+normal zc
+472
+normal zc
+478
+normal zc
+484
+normal zc
+441
+normal zc
+491
+normal zc
+497
+normal zc
+501
+normal zc
+506
+normal zc
+513
+normal zc
+517
+normal zc
+523
+normal zc
+527
+normal zc
+533
+normal zc
+540
+normal zc
+556
+normal zc
+564
+normal zc
+573
+normal zc
+577
+normal zc
+582
+normal zc
+586
+normal zc
+591
+normal zc
+596
+normal zc
+601
+normal zc
+606
+normal zc
+611
+normal zc
+616
+normal zc
+621
+normal zc
+626
+normal zc
+631
+normal zc
+636
+normal zc
+641
+normal zc
+646
+normal zc
+651
+normal zc
+656
+normal zc
+661
+normal zc
+666
+normal zc
+671
+normal zc
+676
+normal zc
+681
+normal zc
+686
+normal zc
+691
+normal zc
+696
+normal zc
+701
+normal zc
+706
+normal zc
+711
+normal zc
+716
+normal zc
+721
+normal zc
+726
+normal zc
+731
+normal zc
+736
+normal zc
+741
+normal zc
+746
+normal zc
+751
+normal zc
+757
+normal zc
+762
+normal zc
+769
+normal zc
+774
+normal zc
+783
+normal zc
+793
+normal zc
+806
+normal zc
+810
+normal zc
+817
+normal zc
+823
+normal zc
+829
+normal zc
+836
+normal zc
+844
+normal zo
+846
+normal zc
+852
+normal zc
+858
+normal zc
+844
+normal zc
+866
+normal zo
+868
+normal zc
+874
+normal zc
+880
+normal zc
+866
+normal zc
+888
+normal zc
+895
+normal zc
+917
+normal zc
+924
+normal zc
+949
+normal zc
+954
+normal zc
+958
+normal zc
+967
+normal zc
+971
+normal zc
+979
+normal zc
+988
+normal zc
+992
+normal zc
+1003
+normal zc
+1007
+normal zc
+1013
+normal zc
+1022
+normal zc
+1026
+normal zc
+1034
+normal zc
+1038
+normal zc
+1045
+normal zc
+1063
+normal zc
+let s:l = 115 - ((23 * winheight(0) + 29) / 58)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+115
+normal! 04l
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

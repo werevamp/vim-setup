@@ -17,7 +17,7 @@ set background=dark
 " Basic Options 
 set hidden
 set ruler
-set history=200
+set history=500
 set number
 set backspace=indent,eol,start
 set linespace=0
@@ -49,9 +49,9 @@ set autoindent
 set smartindent
 
 set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 " search
 set hlsearch
@@ -69,8 +69,7 @@ let maplocalleader = "\\"
 set noswapfile
 set nobackup
 set nowb
-set backup
-set backupdir=~/.vim/1337squad"
+set nowritebackup
 
 " Folding 
 set foldlevelstart=0
@@ -253,6 +252,8 @@ function! s:Bclose(bang, buffer)
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <Leader>d :Bclose!<CR>
+
+au BufRead,BufNewFile *.scss setfiletype css
 
 " Plugin
 hi Directory ctermfg=3 ctermbg=4
