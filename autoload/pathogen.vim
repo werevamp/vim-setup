@@ -5,7 +5,7 @@
 " Install in ~/.vim/autoload (or ~\vimfiles\autoload).
 "
 " For management of individually installed plugins in ~/.vim/bundle (or
-" ~\vimfiles\bundle), adding `execute pathogen#infect()` to the top of your
+" ~\vimfiles\bundle), adding `call pathogen#infect()` to the top of your
 " .vimrc is the only other setup necessary.
 "
 " The API is documented inline below.
@@ -15,6 +15,17 @@ if exists("g:loaded_pathogen") || &cp
 endif
 let g:loaded_pathogen = 1
 
+<<<<<<< HEAD
+=======
+function! s:warn(msg)
+  if &verbose
+    echohl WarningMsg
+    echomsg a:msg
+    echohl NONE
+  endif
+endfunction
+
+>>>>>>> ed90ab7f1b31ddb50760b9df0a02a3c53058b491
 " Point of entry for basic default usage.  Give a relative path to invoke
 " pathogen#interpose() (defaults to "bundle/{}"), or an absolute path to invoke
 " pathogen#surround().  Curly braces are expanded with pathogen#expand():
@@ -125,9 +136,23 @@ function! pathogen#interpose(name) abort
   let list = []
   for dir in pathogen#split(&rtp)
     if dir =~# '\<after$'
+<<<<<<< HEAD
       let list += reverse(filter(pathogen#expand(dir[0:-6].name.sep.'after'), '!pathogen#is_disabled(v:val[0:-7])')) + [dir]
     else
       let list += [dir] + filter(pathogen#expand(dir.sep.name), '!pathogen#is_disabled(v:val)')
+=======
+      if name =~# '{}$'
+        let list +=  filter(pathogen#glob_directories(substitute(dir,'after$',name[0:-3],'').'*[^~]'.sep.'after'), '!pathogen#is_disabled(v:val[0:-7])') + [dir]
+      else
+        let list += [dir, substitute(dir, 'after$', '', '') . name . sep . 'after']
+      endif
+    else
+      if name =~# '{}$'
+        let list +=  [dir] + filter(pathogen#glob_directories(dir.sep.name[0:-3].'*[^~]'), '!pathogen#is_disabled(v:val)')
+      else
+        let list += [dir . sep . name, dir]
+      endif
+>>>>>>> ed90ab7f1b31ddb50760b9df0a02a3c53058b491
     endif
   endfor
   let &rtp = pathogen#join(pathogen#uniq(list))
@@ -140,9 +165,15 @@ let s:done_bundles = {}
 function! pathogen#helptags() abort
   let sep = pathogen#slash()
   for glob in pathogen#split(&rtp)
+<<<<<<< HEAD
     for dir in map(split(glob(glob), "\n"), 'v:val.sep."/doc/".sep')
       if (dir)[0 : strlen($VIMRUNTIME)] !=# $VIMRUNTIME.sep && filewritable(dir) == 2 && !empty(split(glob(dir.'*.txt'))) && (!filereadable(dir.'tags') || filewritable(dir.'tags'))
         silent! execute 'helptags' pathogen#fnameescape(dir)
+=======
+    for dir in split(glob(glob), "\n")
+      if (dir.sep)[0 : strlen($VIMRUNTIME)] !=# $VIMRUNTIME.sep && filewritable(dir.sep.'doc') == 2 && !empty(filter(split(glob(dir.sep.'doc'.sep.'*'),"\n>"),'!isdirectory(v:val)')) && (!filereadable(dir.sep.'doc'.sep.'tags') || filewritable(dir.sep.'doc'.sep.'tags'))
+        helptags `=dir.'/doc'`
+>>>>>>> ed90ab7f1b31ddb50760b9df0a02a3c53058b491
       endif
     endfor
   endfor
